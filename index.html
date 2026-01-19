@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exotic Car Premium Studio - We Detail With Passion</title>
+    <link rel="icon" type="image/webp" href="images/BrandLogo.webp" fetchpriority="low">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+    
+    <style>
+      /* --- CSS Variables & Theme Colors --- */
+      :root {
+        /* Core Colors - Black & Gold Theme */
+        --bs-primary: #D4AF37; /* Classic Gold */
+        --bs-secondary: #F2D06B; /* Lighter Gold */
+        
+        /* Deep Black Theme */
+        --bs-dark: #000000; 
+        --bs-light: #0f0f0f; /* Very dark gray for contrast */
+        
+        --bs-body-bg: var(--bs-dark);
+        --bs-body-color: #f8f9fa;
+
+        --gold-gradient: linear-gradient(135deg, var(--bs-primary) 0%, var(--bs-secondary) 100%);
+        --black-gradient: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.95) 100%);
+
+        --section-spacer: clamp(3rem, 5vw, 5rem);
+        --header-height: 97px;
+      }
+
+      .text-primary{
+        color: var(--bs-primary) !important;
+      }
+
+      /* --- General Styles --- */
+      body {
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        padding-top: var(--header-height);
+        background-color: var(--bs-dark);
+        color: var(--bs-body-color);
+      }
+      
+      h1, h2, h3 { font-weight: 700; }
+      
+      .text-gradient-gold {
+        background: var(--gold-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: inline-block;
+      }
+      a{
+        text-decoration: none;
+      }
+      
+      .letter-spacing-2 { letter-spacing: 2px; }
+      .section-padding { padding-top: var(--section-spacer); padding-bottom: var(--section-spacer); }
+      .bg-dark-contrast { background-color: var(--bs-light) !important; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; }
+
+      /* --- Buttons --- */
+      .btn-primary {
+        background: var(--gold-gradient);
+        border: none;
+        color: #000;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+      }
+      .btn-primary:hover {
+        background: linear-gradient(135deg, var(--bs-secondary) 0%, var(--bs-primary) 100%);
+        transform: translateY(-2px);
+        color: #000;
+        box-shadow: 0 4px 20px rgba(212, 175, 55, 0.5);
+      }
+      .btn-outline-primary {
+        color: var(--bs-primary);
+        border: 1px solid var(--bs-primary) !important;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+      .btn-outline-primary:hover, .btn-outline-primary.active {
+        background-color: var(--bs-primary);
+        color: #000;
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        border: 1px solid var(--bs-primary) !important;
+        
+      }
+      .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+            color: var(--bs-light) !important;
+            background-color: var(--bs-primary) !important;
+            border-color: var(--bs-primary) !important;
+        }
+
+      /* --- Header --- */
+      .navbar {
+        height: var(--header-height);
+        background-color: rgba(0, 0, 0, 0.95) !important;
+        /* backdrop-filter: blur(10px); */
+        border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      }
+      .navbar-brand img { max-height: 70px; width: auto; }
+      .nav-link { color: #fff !important; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+      .nav-link:hover, .nav-link.active { color: var(--bs-primary) !important; }
+      .offcanvas { background-color: #000; border-left: 1px solid var(--bs-primary); }
+    .navAnchor a{
+        color: var(--bs-body-color);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .navAnchor a:hover{
+        color: var(--bs-primary);
+    }
+      /* --- Hero Swiper --- */
+      #home { margin-top: calc(var(--header-height) * -1); }
+      .hero-swiper { 
+            width: 100%; 
+            height: auto;       /* Was 100vh or min-content */
+            min-height: 100vh;  /* Ensures full screen on desktop */
+        }
+      /* Update this class */
+      .hero-slide {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        
+        /* 1. Allow height to grow beyond screen size if needed */
+        height: auto; 
+        min-height: 100vh; 
+        
+        /* 2. Enable Flexbox */
+        display: flex;
+        flex-direction: column; /* Stack content vertically */
+        
+        /* 3. VITAL: Remove 'align-items: center' and use padding instead */
+        /* 120px ensures text starts BELOW your 97px header */
+        padding-top: 130px;  
+        padding-bottom: 60px;
+      }
+      .hero-overlay {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: var(--black-gradient);
+      }
+      /* Update this class */
+        .hero-content { 
+            position: relative; 
+            z-index: 2; 
+            
+            /* 1. Remove the old padding (we moved it to .hero-slide) */
+            padding-top: 0; 
+            
+            /* 2. Add Smart Centering */
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+      .swiper-button-next, .swiper-button-prev { color: var(--bs-primary) !important; }
+      .swiper-pagination-bullet-active { background: var(--bs-primary) !important; }
+
+      /* --- Services Cards --- */
+      .service-card {
+        background: #0a0a0a; border: 1px solid #222; transition: all 0.4s ease;
+        position: relative; overflow: hidden;
+      }
+      .service-card::before {
+        content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+        background: var(--gold-gradient); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+      }
+      .service-card:hover { transform: translateY(-10px); border-color: #333; }
+      .service-card:hover::before { transform: scaleX(1); }
+      .service-icon-box {
+        width: 80px; height: 80px;
+        background: linear-gradient(135deg, #111 0%, #000 100%);
+        border: 1px solid #333; color: var(--bs-primary);
+      }
+
+      /* --- Filtered Gallery (Fancybox) --- */
+      .gallery-item {
+        display: block; 
+        transition: all 0.4s ease;
+      }
+      .gallery-item.hide {
+        display: none !important; /* Force hide */
+      }
+      .gallery-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        border: 1px solid #222;
+        cursor: pointer;
+        aspect-ratio: 4/3;
+        display: block;
+      }
+      .gallery-card img {
+        width: 100%; height: 100%; object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+      .gallery-card:hover img { transform: scale(1.1); }
+      
+      .gallery-overlay {
+        position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.7);
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        opacity: 0; transition: opacity 0.3s ease;
+      }
+      .gallery-card:hover .gallery-overlay { opacity: 1; }
+      
+      .zoom-icon { font-size: 2rem; color: var(--bs-primary); margin-bottom: 10px; }
+      #contactForm input::placeholder, #contactForm textarea::placeholder { color: #797979; }
+
+      /* --- Contact Form --- */
+      .form-control { background-color: #050505; border: 1px solid #333; color: #fff; padding: 1rem; }
+      .form-control:focus { background-color: #000; border-color: var(--bs-primary); color: #fff; box-shadow: none; }
+      .contact-info-box { background-color: #080808; border: 1px solid #222; transition: transform 0.3s; position: relative; }
+      .absAnchor{
+        position: absolute;
+        inset: 0;
+      }
+      .contact-info-box:hover { border-color: var(--bs-primary); transform: translateX(5px); }
+
+      /* --- Footer --- */
+      .footer { background: #000; border-top: 1px solid #222; }
+      img{
+        width: 100%;
+      }
+      .footerBrand{
+        max-width: 120px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+  </head>
+  <body data-bs-spy="scroll" data-bs-target="#mainNavbar" data-bs-offset="100">
+
+    <header id="header" class="fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark" id="mainNavbar">
+            <div class="container">
+              <a class="navbar-brand d-flex align-items-center" href="#home">
+                <img src="images/BrandLogo.webp" alt="Exotic Car Premium Studio Logo" class="me-2"> 
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                <span class="iconify text-primary" data-icon="heroicons:bars-3-bottom-right-20-solid" data-width="30"></span>
+              </button>
+              <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
+                <div class="offcanvas-header border-bottom border-secondary">
+                  <h5 class="offcanvas-title text-gradient-gold fw-bold">EXOTIC CAR</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Work</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                  </ul>
+                  <div class="d-lg-none mt-4 border-top border-secondary pt-4 navAnchor">
+                      <p class="mb-3"><a href="tel:+919558566851"><span class="iconify text-primary me-2" data-icon="heroicons:phone-20-solid"></span> +91 95585 66851</a></p>
+                      <p><a href="https://maps.app.goo.gl/dMNjiey1MEK7ZJu46"><span class="iconify text-primary me-2" data-icon="heroicons:map-pin-20-solid"></span> A/40 Shrenik park, Vadodara</a></p> 
+                  </div>
+                </div> 
+              </div>
+            </div>
+          </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="swiper hero-swiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide hero-slide" style="background-image: url('https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=2070&auto=format&fit=crop');">
+                    <div class="hero-overlay"></div>
+                    <div class="container hero-content text-center">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10">
+                                <h3 class="text-primary text-uppercase letter-spacing-2 mb-2">Welcome to</h3>
+                                <h1 class="text-white mb-3 display-3">Exotic Car <span class="text-gradient-gold">Premium Studio</span></h1>
+                                <p class=" text-white-75 mb-5 fst-italic fw-bold">"We Detail With Passion"</p>
+                                <a href="#contact" class="btn btn-primary btn-lg px-5 rounded-0 me-md-3">Book Appointment</a>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide hero-slide" style="background-image: url('https://images.unsplash.com/photo-1601362840469-51e4d8d58785?q=80&w=2070&auto=format&fit=crop');">
+                    <div class="hero-overlay"></div>
+                    <div class="container hero-content text-center">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10">
+                                <h2 class="text-white mb-4 h1">Ultimate <span class="text-gradient-gold">Protection</span></h2>
+                                <p class=" text-white-75 mb-5 fw-bold">Certified Graphene & Ceramic Coatings for long-lasting shine.</p>
+                                <a href="#contact" class="btn btn-primary btn-lg px-5 rounded-0">Get a Quote</a>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev d-none d-lg-flex"></div>
+                <div class="swiper-button-next d-none d-lg-flex"></div>
+              </div>
+        </section>
+
+        <section id="about" class="section-padding bg-dark-contrast">
+            <div class="container">
+                <div class="row align-items-center gy-5">
+                    <div class="col-lg-6">
+                        <div class="position-relative">
+                            <div style="position: absolute; top: -15px; left: -15px; width: 50%; height: 50%; border-top: 2px solid var(--bs-primary); border-left: 2px solid var(--bs-primary); z-index: 0;"></div>
+                            <img src="https://images.unsplash.com/photo-1552930294-6b595f4c2974?q=80&w=2071&auto=format&fit=crop" alt="Exotic Car Studio Workshop" class="img-fluid shadow-lg position-relative" style="z-index: 1;">
+                            <div style="position: absolute; bottom: -15px; right: -15px; width: 50%; height: 50%; border-bottom: 2px solid var(--bs-primary); border-right: 2px solid var(--bs-primary); z-index: 0;"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 ps-lg-5">
+                        <h3 class="text-primary text-uppercase letter-spacing-2 mb-3">Who We Are</h3>
+                        <h2 class="mb-4 text-white">Detailing with <span class="text-gradient-gold">Passion</span></h2>
+                        <p class="text-white-50 mb-4">At Exotic Car Premium Studio, we believe every vehicle deserves a showroom finish. Located in the heart of Ahmedabad, we specialize in high-end automotive care, restoring the beauty of your vehicle with precision and premium products.</p>
+                        
+                        <div class="row g-4 mb-4">
+                            <div class="col-6">
+                                <div class="border-start border-primary ps-3">
+                                    <h2 class="text-white mb-0">100%</h2>
+                                    <small class="text-white-50 text-uppercase">Satisfaction</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="border-start border-primary ps-3">
+                                    <h2 class="text-white mb-0">Premium</h2>
+                                    <small class="text-white-50 text-uppercase">Quality Products</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section-padding">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h3 class="text-primary text-uppercase letter-spacing-2 mb-2">Our Expertise</h3>
+                    <h2 class="mb-0 text-white">Premium <span class="text-gradient-gold">Services</span></h2>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="service-card p-4 h-100">
+                            <div class="service-icon-box rounded-circle d-flex align-items-center justify-content-center mb-4">
+                                <span class="iconify h2 mb-0" data-icon="mdi:car-wash"></span>
+                            </div>
+                            <h4 class="mb-3 text-white">Exterior Detailing</h4>
+                            <p class="text-white-50 mb-0">Complete decontamination, clay bar treatment, and foam wash.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="service-card p-4 h-100">
+                            <div class="service-icon-box rounded-circle d-flex align-items-center justify-content-center mb-4">
+                                <span class="iconify h2 mb-0" data-icon="mdi:shield-check"></span>
+                            </div>
+                            <h4 class="mb-3 text-white">Ceramic Coating</h4>
+                            <p class="text-white-50 mb-0">High-gloss, hydrophobic protection layers that repel water and UV rays.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="service-card p-4 h-100">
+                            <div class="service-icon-box rounded-circle d-flex align-items-center justify-content-center mb-4">
+                                <span class="iconify h2 mb-0" data-icon="mdi:car-door"></span>
+                            </div>
+                            <h4 class="mb-3 text-white">PPF (Paint Protection)</h4>
+                            <p class="text-white-50 mb-0">Self-healing film to prevent rock chips and scratches.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="service-card p-4 h-100">
+                            <div class="service-icon-box rounded-circle d-flex align-items-center justify-content-center mb-4">
+                                <span class="iconify h2 mb-0" data-icon="mdi:car-seat"></span>
+                            </div>
+                            <h4 class="mb-3 text-white">Interior Spa</h4>
+                            <p class="text-white-50 mb-0">Deep cleaning, leather conditioning, and steam sanitization.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="service-card p-4 h-100">
+                            <div class="service-icon-box rounded-circle d-flex align-items-center justify-content-center mb-4">
+                                <span class="iconify h2 mb-0" data-icon="mdi:spray"></span>
+                            </div>
+                            <h4 class="mb-3 text-white">Denting & Painting</h4>
+                            <p class="text-white-50 mb-0">Professional bodywork repair and precise color matching.</p>
+                        </div>
+                    </div>
+                     <div class="col-md-6 col-lg-4">
+                        <div class="service-card p-4 h-100">
+                            <div class="service-icon-box rounded-circle d-flex align-items-center justify-content-center mb-4">
+                                <span class="iconify h2 mb-0" data-icon="mdi:car-light-high"></span>
+                            </div>
+                            <h4 class="mb-3 text-white">Headlight Restoration</h4>
+                            <p class="text-white-50 mb-0">Removing oxidation to improve night visibility.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="section-padding bg-dark-contrast">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h3 class="text-primary text-uppercase letter-spacing-2 mb-2">Recent Projects</h3>
+                    <h2 class="mb-4 text-white">The <span class="text-gradient-gold">Gallery</span></h2>
+                    
+                    <div class="portfolio-filter d-flex justify-content-center flex-wrap gap-2 mb-4">
+                        <button class="btn btn-outline-primary active" data-filter="all">All</button>
+                        <button class="btn btn-outline-primary" data-filter="ppf">PPF</button>
+                        <button class="btn btn-outline-primary" data-filter="ceramic">Ceramic</button>
+                        <button class="btn btn-outline-primary" data-filter="interior">Interior</button>
+                    </div>
+                </div>
+
+                <div class="row g-4 portfolio-container">
+                    <div class="col-md-6 col-lg-4 gallery-item ppf">
+                        <a href="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=1000" class="gallery-card" data-fancybox="gallery" data-caption="Full Body PPF Application">
+                            <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=800&auto=format&fit=crop" alt="PPF">
+                            <div class="gallery-overlay">
+                                <span class="iconify zoom-icon" data-icon="heroicons:magnifying-glass-plus"></span>
+                                <h5 class="text-white mb-0">Full Body PPF</h5>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4 gallery-item ceramic">
+                        <a href="https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=1000" class="gallery-card" data-fancybox="gallery" data-caption="Ceramic Coating Shine">
+                            <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=800&auto=format&fit=crop" alt="Ceramic Coating">
+                            <div class="gallery-overlay">
+                                <span class="iconify zoom-icon" data-icon="heroicons:magnifying-glass-plus"></span>
+                                <h5 class="text-white mb-0">High Gloss Coating</h5>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4 gallery-item interior">
+                        <a href="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?q=80&w=1000" class="gallery-card" data-fancybox="gallery" data-caption="Luxury Interior Detailing">
+                            <img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?q=80&w=800&auto=format&fit=crop" alt="Interior">
+                            <div class="gallery-overlay">
+                                <span class="iconify zoom-icon" data-icon="heroicons:magnifying-glass-plus"></span>
+                                <h5 class="text-white mb-0">Interior Spa</h5>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 gallery-item ppf">
+                        <a href="https://images.unsplash.com/photo-1745585745862-7d86eb5a5ad4?q=80&w=1000" class="gallery-card" data-fancybox="gallery" data-caption="Hood Protection Film">
+                            <img src="https://images.unsplash.com/photo-1745585745862-7d86eb5a5ad4?q=80&w=800&auto=format&fit=crop" alt="PPF Hood">
+                            <div class="gallery-overlay">
+                                <span class="iconify zoom-icon" data-icon="heroicons:magnifying-glass-plus"></span>
+                                <h5 class="text-white mb-0">Paint Protection</h5>
+                            </div>
+                        </a>
+                    </div>
+
+                     <div class="col-md-6 col-lg-4 gallery-item ceramic">
+                        <a href="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1000" class="gallery-card" data-fancybox="gallery" data-caption="Paint Correction & Coating">
+                            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=800&auto=format&fit=crop" alt="Paint Correction">
+                            <div class="gallery-overlay">
+                                <span class="iconify zoom-icon" data-icon="heroicons:magnifying-glass-plus"></span>
+                                <h5 class="text-white mb-0">Paint Correction</h5>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 gallery-item interior">
+                        <a href="https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=1000" class="gallery-card" data-fancybox="gallery" data-caption="Leather Seat Restoration">
+                            <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=800&auto=format&fit=crop" alt="Interior">
+                            <div class="gallery-overlay">
+                                <span class="iconify zoom-icon" data-icon="heroicons:magnifying-glass-plus"></span>
+                                <h5 class="text-white mb-0">Leather Care</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section-padding">
+            <div class="container">
+                <div class="row gy-5">
+                    <div class="col-lg-5">
+                        <h3 class="text-primary text-uppercase letter-spacing-2 mb-3">Get In Touch</h3>
+                        <h2 class="mb-4 text-white">Visit Our <span class="text-gradient-gold">Studio</span></h2>
+                        <p class="text-white-50 mb-5">Ready to transform your car? Visit Exotic Car Premium Studio in Ahmedabad or drop us a message.</p>
+                        
+                        <div class="d-flex flex-column gap-4">
+                            <div class="contact-info-box p-4 rounded-3 d-flex align-items-start">
+                                <div class="contact-icon fs-3 me-3 mt-1">
+                                    <span class="iconify" data-icon="heroicons:map-pin-20-solid"></span>
+                                </div>
+                                <div>
+                                    <h5 class="mb-2 text-white">Address</h5>
+                                    <p class="mb-0 text-white-50">
+                                        A/40 Shrenik park, Akota Stadium Rd,<br> opp. Tennis Gate, Vadodara,<br> Gujarat 390007
+                                    </p>
+                                </div>
+                                <a target="_blank" class="absAnchor" href="https://maps.app.goo.gl/dMNjiey1MEK7ZJu46"></a>
+                            </div>
+                            <div class="contact-info-box p-4 rounded-3 d-flex align-items-center">
+                                <div class="contact-icon fs-3 me-3">
+                                    <span class="iconify" data-icon="heroicons:phone-20-solid"></span>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1 text-white">Phone</h5>
+                                    <p class="mb-0">
+                                        <a href="tel:+919558566851" class="text-white-50 text-decoration-none">+91 95585 66851</a>
+                                    </p>
+                                </div>
+                                <a target="_blank" class="absAnchor" href="tel:+919558566851"></a>
+                            </div>
+                             <div class="contact-info-box p-4 rounded-3 d-flex align-items-center">
+                                <div class="contact-icon fs-3 me-3">
+                                    <span class="iconify" data-icon="heroicons:envelope-20-solid"></span>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1 text-white">Email</h5>
+                                    <p class="mb-0">
+                                        <a href="mailto:contact@exoticcarstudio.com" class="text-white-50 text-decoration-none">contact@exoticcarstudio.com</a>
+                                    </p>
+                                </div>
+                                <a target="_blank" class="absAnchor" href="mailto:contact@exoticcarstudio.com"></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-7">
+                        <div class="p-4 p-md-5 bg-dark-contrast border border-secondary shadow-lg h-100">
+                            <h3 class="mb-4 text-white">Request a Callback / Quote</h3>
+                            <form id="contactForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <input type="text" id="nameInput" class="form-control" placeholder="Your Name" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="tel" id="phoneInput" class="form-control" placeholder="Phone Number" required>
+                                    </div>
+                                    
+                                    <div class="col-12">
+                                        <input type="text" id="carInput" class="form-control" placeholder="Car Model / Vehicle Details (e.g., BMW X5)" required>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <select id="serviceInput" class="form-control text-white-50">
+                                            <option selected>Service Interested In</option>
+                                            <option>Ceramic Coating</option>
+                                            <option>Paint Protection Film (PPF)</option>
+                                            <option>Interior Detailing</option>
+                                            <option>Denting & Painting</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea id="messageInput" class="form-control" rows="4" placeholder="Message" required></textarea>
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <a id="whatsapp-btn" href="#" class="btn btn-primary w-100 py-3 d-flex align-items-center justify-content-center gap-2">
+                                            <span class="iconify" data-icon="logos:whatsapp-icon" data-width="24"></span>
+                                            <span class="fw-bold">Chat on WhatsApp</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer py-5 text-center">
+        <div class="container">
+                <div >
+                     <h4 class="footerBrand mb-3"><img src="images/BrandLogo.webp" alt="Exotic Car"></h4>
+                     <p class="text-white-50 small">Premium Studio for car detailing, paint protection, and restoration in Ahmedabad.</p>
+                </div>
+                <div>
+                    <p class="text-white-50 mb-0">&copy; 2026 Exotic Car Premium Studio.<br>All Rights Reserved.</p>
+                </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+    <script>
+        // 1. Fancybox Init
+        Fancybox.bind("[data-fancybox]", {});
+
+        // 2. Swiper Init
+        const heroSwiper = new Swiper('.hero-swiper', {
+            loop: true,
+            effect: 'fade',
+            speed: 1000,
+            fadeEffect: { crossFade: true },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        // 3. FIXED Portfolio Filter Logic
+        // This explicitly removes 'data-fancybox' from hidden items so the lightbox doesn't see them
+        const filterBtns = document.querySelectorAll('.portfolio-filter button');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                galleryItems.forEach(item => {
+                    // Find the anchor tag inside the item (which holds the data-fancybox attr)
+                    const link = item.querySelector('a');
+
+                    if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                        // SHOW ITEM
+                        item.classList.remove('hide');
+                        // Add fancybox attribute back so it opens in lightbox
+                        link.setAttribute('data-fancybox', 'gallery');
+                        setTimeout(() => item.style.opacity = '1', 50);
+                    } else {
+                        // HIDE ITEM
+                        item.classList.add('hide');
+                        // Remove fancybox attribute so lightbox ignores it
+                        link.removeAttribute('data-fancybox');
+                        item.style.opacity = '0';
+                    }
+                });
+            });
+        });
+
+        // 4. Header Scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.querySelector('.navbar').style.paddingTop = '0.5rem';
+                header.querySelector('.navbar').style.paddingBottom = '0.5rem';
+                header.querySelector('.navbar').style.backgroundColor = 'rgba(0, 0, 0, 0.98)';
+            } else {
+                header.querySelector('.navbar').style.paddingTop = '1rem';
+                header.querySelector('.navbar').style.paddingBottom = '1rem';
+                header.querySelector('.navbar').style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+            }
+        });
+
+        // 5. Dynamic WhatsApp Logic
+        const whatsappBtn = document.getElementById('whatsapp-btn');
+        const whatsappNumber = "919574004500";
+
+        whatsappBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default link behavior
+
+            // 1. Gather Data from Inputs
+            const name = document.getElementById('nameInput').value.trim();
+            const phone = document.getElementById('phoneInput').value.trim();
+            const car = document.getElementById('carInput').value.trim();
+            const serviceSelect = document.getElementById('serviceInput');
+            const service = serviceSelect.options[serviceSelect.selectedIndex].text;
+            const message = document.getElementById('messageInput').value.trim();
+
+            // 2. Simple Validation
+            if (!name || !phone) {
+                alert("Please enter at least your Name and Phone Number to start a chat.");
+                return;
+            }
+
+            // 3. Format the Message (using %0A for new lines)
+            // Checks if a service was actually selected or left as default
+            const serviceText = (service === "Service Interested In") ? "General Inquiry" : service;
+            
+            let msgText = `*New Website Inquiry*`;
+            msgText += `\n\n*Name:* ${name}`;
+            msgText += `\n*Phone:* ${phone}`;
+            msgText += `\n*Vehicle:* ${car || 'Not specified'}`;
+            msgText += `\n*Service:* ${serviceText}`;
+            msgText += `\n*Message:* ${message}`;
+
+            // 4. Create Link
+            const encodedMsg = encodeURIComponent(msgText);
+            const isMobile = window.innerWidth < 992;
+            
+            const url = isMobile
+                ? `https://wa.me/${whatsappNumber}?text=${encodedMsg}`
+                : `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMsg}`;
+
+            // 5. Open WhatsApp
+            window.open(url, '_blank');
+
+            // 6. Clear form after delay
+            setTimeout(() => {
+                document.getElementById('contactForm').reset();
+            }, 2000);
+        });
+    </script>
+  </body>
+</html>

@@ -11,8 +11,7 @@
     <link rel="preload" as="image" href="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?q=80&w=2070&auto=format&fit=crop" fetchpriority="high" imagesizes="100vw">
 
     
-    <!-- Bootstrap CSS (critical) -->
-<link rel="preload"
+    <link rel="preload"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       as="style"
       fetchpriority="high"
@@ -30,16 +29,16 @@
 
 <script src="https://code.iconify.design/3/3.1.0/iconify.min.js" defer></script>
 
-<!-- Swiper CSS -->
 <link rel="preload"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
       as="style"
       fetchpriority="medium"
       onload="this.onload=null;this.rel='stylesheet'">
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
+
 <noscript>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
 </noscript>
 
 
@@ -116,12 +115,14 @@
         text-transform: uppercase;
         font-weight: 600;
       }
-      .btn-outline-primary:hover, .btn-outline-primary.active {
+      /* MixItUp adds 'mixitup-control-active' class to active buttons */
+      .btn-outline-primary:hover, 
+      .btn-outline-primary.active,
+      .btn-outline-primary.mixitup-control-active {
         background-color: var(--bs-primary);
         color: #000;
         box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         border: 1px solid var(--bs-primary) !important;
-        
       }
       .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
             color: var(--bs-light) !important;
@@ -211,13 +212,14 @@
       }
 
       /* --- Filtered Gallery (Fancybox) --- */
+      /* Note: We removed the custom .hide class logic as MixItUp handles display */
+      
       .gallery-item {
-        display: block; 
-        transition: all 0.4s ease;
+        /* Important for hardware acceleration during MixItUp animations */
+        transform: translateZ(0); 
+        backface-visibility: hidden;
       }
-      .gallery-item.hide {
-        display: none !important; /* Force hide */
-      }
+
       .gallery-card {
         position: relative;
         overflow: hidden;
@@ -443,15 +445,15 @@
                     <h2 class="mb-4 text-white">The <span class="text-gradient-gold">Gallery</span></h2>
                     
                     <div class="portfolio-filter d-flex justify-content-center flex-wrap gap-2 mb-4">
-                        <button class="btn btn-outline-primary active" data-filter="all">All</button>
-                        <button class="btn btn-outline-primary" data-filter="ppf">PPF</button>
-                        <button class="btn btn-outline-primary" data-filter="ceramic">Ceramic</button>
-                        <button class="btn btn-outline-primary" data-filter="interior">Interior</button>
+                        <button class="btn btn-outline-primary" data-filter="all">All</button>
+                        <button class="btn btn-outline-primary" data-filter=".ppf">PPF</button>
+                        <button class="btn btn-outline-primary" data-filter=".ceramic">Ceramic</button>
+                        <button class="btn btn-outline-primary" data-filter=".interior">Interior</button>
                     </div>
                 </div>
 
-                <div class="row g-4 portfolio-container">
-                    <div class="col-md-6 col-lg-4 gallery-item ppf">
+                <div id="portfolio-grid" class="row g-4 portfolio-container">
+                    <div class="col-md-6 col-lg-4 mix ppf">
                         <a href="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=1000" class="gallery-card" data-fancybox="gallery" data-caption="Full Body PPF Application">
                             <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=800&auto=format&fit=crop" alt="PPF">
                             <div class="gallery-overlay">
@@ -461,7 +463,7 @@
                         </a>
                     </div>
                     
-                    <div class="col-md-6 col-lg-4 gallery-item ceramic">
+                    <div class="col-md-6 col-lg-4 mix ceramic">
                         <a href="https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=1000" class="gallery-card" data-fancybox="gallery" data-caption="Ceramic Coating Shine">
                             <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=800&auto=format&fit=crop" alt="Ceramic Coating">
                             <div class="gallery-overlay">
@@ -471,7 +473,7 @@
                         </a>
                     </div>
                     
-                    <div class="col-md-6 col-lg-4 gallery-item interior">
+                    <div class="col-md-6 col-lg-4 mix interior">
                         <a href="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?q=80&w=1000" class="gallery-card" data-fancybox="gallery" data-caption="Luxury Interior Detailing">
                             <img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?q=80&w=800&auto=format&fit=crop" alt="Interior">
                             <div class="gallery-overlay">
@@ -481,7 +483,7 @@
                         </a>
                     </div>
 
-                    <div class="col-md-6 col-lg-4 gallery-item ppf">
+                    <div class="col-md-6 col-lg-4 mix ppf">
                         <a href="https://images.unsplash.com/photo-1745585745862-7d86eb5a5ad4?q=80&w=1000" class="gallery-card" data-fancybox="gallery" data-caption="Hood Protection Film">
                             <img src="https://images.unsplash.com/photo-1745585745862-7d86eb5a5ad4?q=80&w=800&auto=format&fit=crop" alt="PPF Hood">
                             <div class="gallery-overlay">
@@ -491,7 +493,7 @@
                         </a>
                     </div>
 
-                     <div class="col-md-6 col-lg-4 gallery-item ceramic">
+                     <div class="col-md-6 col-lg-4 mix ceramic">
                         <a href="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1000" class="gallery-card" data-fancybox="gallery" data-caption="Paint Correction & Coating">
                             <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=800&auto=format&fit=crop" alt="Paint Correction">
                             <div class="gallery-overlay">
@@ -501,7 +503,7 @@
                         </a>
                     </div>
 
-                    <div class="col-md-6 col-lg-4 gallery-item interior">
+                    <div class="col-md-6 col-lg-4 mix interior">
                         <a href="https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=1000" class="gallery-card" data-fancybox="gallery" data-caption="Leather Seat Restoration">
                             <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=800&auto=format&fit=crop" alt="Interior">
                             <div class="gallery-overlay">
@@ -613,7 +615,7 @@
                      <p class="text-white-50 small">Premium Studio for car detailing, paint protection, and restoration in Ahmedabad.</p>
                 </div>
                 <div>
-                    <p class="text-white-50 mb-0">&copy; 2026 Exotic Car Premium Studio.<br>All Rights Reserved.</p>
+                    <p class="text-white-50 mb-0">© 2026 Exotic Car Premium Studio.<br>All Rights Reserved.</p>
                 </div>
         </div>
     </footer>
@@ -623,124 +625,120 @@
     
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
     <script>
-        // 1. Fancybox Init
-        Fancybox.bind("[data-fancybox]", {});
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Swiper Init
+            const heroSwiper = new Swiper('.hero-swiper', {
+                loop: true,
+                effect: 'fade',
+                speed: 1000,
+                fadeEffect: { crossFade: true },
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: { el: '.swiper-pagination', clickable: true },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
 
-        // 2. Swiper Init
-        const heroSwiper = new Swiper('.hero-swiper', {
-            loop: true,
-            effect: 'fade',
-            speed: 1000,
-            fadeEffect: { crossFade: true },
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-            pagination: { el: '.swiper-pagination', clickable: true },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
+            // 2. Fancybox Init (Bind to all, we control visibility via attributes)
+            Fancybox.bind("[data-fancybox]", {});
 
-        // 3. FIXED Portfolio Filter Logic
-        // This explicitly removes 'data-fancybox' from hidden items so the lightbox doesn't see them
-        const filterBtns = document.querySelectorAll('.portfolio-filter button');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const filterValue = btn.getAttribute('data-filter');
-
-                galleryItems.forEach(item => {
-                    // Find the anchor tag inside the item (which holds the data-fancybox attr)
-                    const link = item.querySelector('a');
-
-                    if (filterValue === 'all' || item.classList.contains(filterValue)) {
-                        // SHOW ITEM
-                        item.classList.remove('hide');
-                        // Add fancybox attribute back so it opens in lightbox
-                        link.setAttribute('data-fancybox', 'gallery');
-                        setTimeout(() => item.style.opacity = '1', 50);
-                    } else {
-                        // HIDE ITEM
-                        item.classList.add('hide');
-                        // Remove fancybox attribute so lightbox ignores it
-                        link.removeAttribute('data-fancybox');
-                        item.style.opacity = '0';
+            // 3. MixItUp + Fancybox Sync
+            // This ensures when you filter, the Lightbox only cycles through VISIBLE images.
+            const containerEl = document.querySelector('#portfolio-grid');
+            
+            if (containerEl) {
+                const mixer = mixitup(containerEl, {
+                    selectors: {
+                        target: '.mix'
+                    },
+                    animation: {
+                        duration: 300,
+                        nudge: false
+                    },
+                    callbacks: {
+                        onMixEnd: function(state) {
+                             state.targets.forEach(item => {
+                                 const link = item.querySelector('a');
+                                 // Check if item is displayed (MixItUp sets display:none on hidden items)
+                                 if (item.style.display !== 'none') {
+                                     // Visible? Add to 'gallery' group
+                                     link.setAttribute('data-fancybox', 'gallery');
+                                 } else {
+                                     // Hidden? Move to 'hidden' group so lightbox skips it
+                                     link.setAttribute('data-fancybox', 'hidden');
+                                 }
+                             });
+                        }
                     }
                 });
+            }
+
+            // 4. Header Scroll
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.querySelector('.navbar').style.paddingTop = '0.5rem';
+                    header.querySelector('.navbar').style.paddingBottom = '0.5rem';
+                    header.querySelector('.navbar').style.backgroundColor = 'rgba(0, 0, 0, 0.98)';
+                } else {
+                    header.querySelector('.navbar').style.paddingTop = '1rem';
+                    header.querySelector('.navbar').style.paddingBottom = '1rem';
+                    header.querySelector('.navbar').style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+                }
             });
-        });
 
-        // 4. Header Scroll
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.querySelector('.navbar').style.paddingTop = '0.5rem';
-                header.querySelector('.navbar').style.paddingBottom = '0.5rem';
-                header.querySelector('.navbar').style.backgroundColor = 'rgba(0, 0, 0, 0.98)';
-            } else {
-                header.querySelector('.navbar').style.paddingTop = '1rem';
-                header.querySelector('.navbar').style.paddingBottom = '1rem';
-                header.querySelector('.navbar').style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+            // 5. Dynamic WhatsApp Logic
+            const whatsappBtn = document.getElementById('whatsapp-btn');
+            const whatsappNumber = "919558566851";
+
+            if (whatsappBtn) {
+                whatsappBtn.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+
+                    const name = document.getElementById('nameInput').value.trim();
+                    const phone = document.getElementById('phoneInput').value.trim();
+                    const car = document.getElementById('carInput').value.trim();
+                    const serviceSelect = document.getElementById('serviceInput');
+                    const service = serviceSelect.options[serviceSelect.selectedIndex].text;
+                    const message = document.getElementById('messageInput').value.trim();
+
+                    if (!name || !phone) {
+                        alert("Please enter at least your Name and Phone Number to start a chat.");
+                        return;
+                    }
+
+                    const serviceText = (service === "Service Interested In") ? "General Inquiry" : service;
+                    
+                    let msgText = `*New Website Inquiry*`;
+                    msgText += `\n\n*Name:* ${name}`;
+                    msgText += `\n*Phone:* ${phone}`;
+                    msgText += `\n*Vehicle:* ${car || 'Not specified'}`;
+                    msgText += `\n*Service:* ${serviceText}`;
+                    msgText += `\n*Message:* ${message}`;
+
+                    const encodedMsg = encodeURIComponent(msgText);
+                    const isMobile = window.innerWidth < 992;
+                    
+                    const url = isMobile
+                        ? `https://wa.me/${whatsappNumber}?text=${encodedMsg}`
+                        : `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMsg}`;
+
+                    window.open(url, '_blank');
+
+                    setTimeout(() => {
+                        document.getElementById('contactForm').reset();
+                    }, 2000);
+                });
             }
-        });
-
-        // 5. Dynamic WhatsApp Logic
-        const whatsappBtn = document.getElementById('whatsapp-btn');
-        const whatsappNumber = "919558566851";
-
-        whatsappBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent default link behavior
-
-            // 1. Gather Data from Inputs
-            const name = document.getElementById('nameInput').value.trim();
-            const phone = document.getElementById('phoneInput').value.trim();
-            const car = document.getElementById('carInput').value.trim();
-            const serviceSelect = document.getElementById('serviceInput');
-            const service = serviceSelect.options[serviceSelect.selectedIndex].text;
-            const message = document.getElementById('messageInput').value.trim();
-
-            // 2. Simple Validation
-            if (!name || !phone) {
-                alert("Please enter at least your Name and Phone Number to start a chat.");
-                return;
-            }
-
-            // 3. Format the Message (using %0A for new lines)
-            // Checks if a service was actually selected or left as default
-            const serviceText = (service === "Service Interested In") ? "General Inquiry" : service;
-            
-            let msgText = `*New Website Inquiry*`;
-            msgText += `\n\n*Name:* ${name}`;
-            msgText += `\n*Phone:* ${phone}`;
-            msgText += `\n*Vehicle:* ${car || 'Not specified'}`;
-            msgText += `\n*Service:* ${serviceText}`;
-            msgText += `\n*Message:* ${message}`;
-
-            // 4. Create Link
-            const encodedMsg = encodeURIComponent(msgText);
-            const isMobile = window.innerWidth < 992;
-            
-            const url = isMobile
-                ? `https://wa.me/${whatsappNumber}?text=${encodedMsg}`
-                : `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMsg}`;
-
-            // 5. Open WhatsApp
-            window.open(url, '_blank');
-
-            // 6. Clear form after delay
-            setTimeout(() => {
-                document.getElementById('contactForm').reset();
-            }, 2000);
         });
     </script>
   </body>
